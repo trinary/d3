@@ -21,11 +21,12 @@ src/format/format-localized.js: src/locale.js src/format/format-locale.js
 src/time/format-localized.js: src/locale.js src/time/format-locale.js
 	LC_TIME=$(LOCALE) locale -ck LC_TIME | node src/locale.js src/time/format-locale.js > $@
 
+src/version.js: package.json version
+	./version > $@
+
 d3.js: $(shell node_modules/.bin/smash --list src/d3.js) package.json
 	@rm -f $@
-	node_modules/.bin/smash src/d3.js \
-		| sed 's/[[:<:]]VERSION[[:>:]]/"$(shell ./version)"/' \
-		| node_modules/.bin/uglifyjs - -b indent-level=2 -o $@
+	node_modules/.bin/smash src/d3.js | node_modules/.bin/uglifyjs - -b indent-level=2 -o $@
 	@chmod a-w $@
 
 d3.min.js: d3.js
