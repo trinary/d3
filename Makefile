@@ -1,10 +1,10 @@
 LOCALE ?= en_US
 
 GENERATED_FILES = \
-	d3.js \
-	d3.min.js \
 	src/format/format-localized.js \
 	src/time/format-localized.js \
+	d3.js \
+	d3.min.js \
 	bower.json \
 	component.json
 
